@@ -1,0 +1,15 @@
+<div class="row">
+  <ul class="mainNav nav nav-pills pull-right">
+    <li><a href="{% url questions %}">home</a></li>
+    {% if request.user.is_authenticated() and request.user.is_administrator() %}
+        <li><a href="{% url site_settings %}">settings</a></li>
+        <li><a href="{% url widgets %}">widgets</a></li>
+    {% endif %}
+    <li><a href="{% url help %}">help</a></li>
+    {% if request.user.is_authenticated() %}
+      <li><a href="/account/signout">logout</a></li>
+    {% elif settings.USE_ASKBOT_LOGIN_SYSTEM %}
+      <li><a href="/account/signin">login/signup</a></li>
+    {% endif %}
+  </ul>
+</div>

@@ -3,7 +3,7 @@
     {% include "main_page/nothing_found.html" %}
 {% else %}
     {% for thread in threads.object_list %}
-        {{ thread.get_summary_html(search_state=search_state, visitor = request.user) }}
+        {{ thread.get_summary_html(search_state = search_state, visitor = request.user) }}
     {% endfor %}
     {#<div class="evenMore">
         {% trans %}Did not find what you were looking for?{% endtrans %} 

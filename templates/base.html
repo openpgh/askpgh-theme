@@ -35,8 +35,8 @@
     </head>
     <body class="{% block body_class %}{% endblock %}{% if user_messages %} user-messages{% endif %}{% if page_class %} {{page_class}}{% endif %}{% if request.user.is_anonymous() %} anon{% endif %} lang-{{ current_language_code }}">
         <div class="container mainContent">
+            {% include "nav.html" %}
             {% include "widgets/secondary_header.html" %}
-            {% include "widgets/search_bar.html" %}
             {% block body %}{% endblock %}
         </div>
         {% include "widgets/footer.html" %}
