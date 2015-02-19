@@ -8,10 +8,11 @@
 {% endblock %}
 {% block content %}
     {% include "widgets/search_bar.html" %}
-    <div class="row">
-        <div id="question-list">
-            {% include "main_page/questions_loop.html" %}
-        </div>
+    {% include "widgets/ask_button.html" %}
+    {% include "main_page/headline.html" %}
+    {% include "main_page/tab_bar.html" %}
+    <div id="question-list">
+        {% include "main_page/questions_loop.html" %}
     </div>
     {% include "main_page/paginator.html" %}
 {% endblock %}

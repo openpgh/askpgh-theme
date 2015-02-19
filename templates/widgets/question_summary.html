@@ -1,47 +1,71 @@
 {% from "macros.html" import user_country_flag, tag_list_widget, timeago, user_primary_group %}
-<div class="short-summary{% if extra_class %} {{extra_class}}{% endif %}" id="question-{{question.id}}">
-    <div class="counts">
-        <div class="views
-             {% if thread.view_count == 0 -%}
-                no-views
-             {% else -%}
-                some-views
-             {%- endif -%}">
-             <span class="item-count">{{ thread.view_count|humanize_counter }}</span>
-            <div>
-            {% trans cnt=thread.view_count %}view{% pluralize %}views{% endtrans %}
-            </div>
+{% set answer_count = thread.get_answer_count(visitor) %}
+<div class="row short-summary{% if extra_class %} {{extra_class}}{% endif %}" id="question-{{question.id}}">
+    <div class="col-md-6">
+        <div class="questionTitle">
+            <h2>
+                <a href="{{ question.get_absolute_url(thread=thread) }}">{{thread.get_title()|escape}}</a>
+            </h2>
         </div>
-        {% set answer_count = thread.get_answer_count(visitor) %}
-        <div class="answers
+        <div class="questionTags">
+            {{ tag_list_widget(thread.get_tag_names(), search_state=search_state) }}
+        </div>
+        <div class="mobileAnswers
                 {% if answer_count == 0 -%}
                     no-answers
                 {% else -%}
-                    {%- if thread.accepted_answer_id -%}  {# INFO: Use _id to not fetch the whole answer post #}
+                    {%- if thread.accepted_answer_id -%}
                         accepted
                     {%- else -%}
                         some-answers
                     {%- endif -%}
                 {%- endif -%}"> 
-            <span 
-                class="item-count"
-            >{{ answer_count|humanize_counter }}{% if thread.accepted_answer_id %}{% endif %}</span>
-            <div>
-            {{ settings.WORDS_ANSWERS_COUNTABLE_FORMS|py_pluralize(answer_count) }}
-            </div>
+                {{ answer_count|humanize_counter }}{% if thread.accepted_answer_id %}{% endif %}
+                {{ settings.WORDS_ANSWERS_COUNTABLE_FORMS|py_pluralize(answer_count) }}
         </div>
-        <div class="votes 
-                    {% if question.score == 0 -%}
-                        no-votes
+    </div>
+    <div class="col-md-6">
+        <div class="counts">
+            <div class="views
+                 {% if thread.view_count == 0 -%}
+                    no-views
+                 {% else -%}
+                    some-views
+                 {%- endif -%}">
+                 <span class="item-count">{{ thread.view_count|humanize_counter }}</span>
+                <div>
+                {% trans cnt=thread.view_count %}view{% pluralize %}views{% endtrans %}
+                </div>
+            </div>
+            <div class="answers
+                    {% if answer_count == 0 -%}
+                        no-answers
                     {% else -%}
-                        some-votes
-                    {%- endif -%}">
-            <span class="item-count">{{question.score|humanize_counter}}</span>
-            <div>
-            {% trans cnt=question.score %}vote{% pluralize %}votes{% endtrans %}
+                        {%- if thread.accepted_answer_id -%}  {# INFO: Use _id to not fetch the whole answer post #}
+                            accepted
+                        {%- else -%}
+                            some-answers
+                        {%- endif -%}
+                    {%- endif -%}"> 
+                <span 
+                    class="item-count"
+                >{{ answer_count|humanize_counter }}{% if thread.accepted_answer_id %}{% endif %}</span>
+                <div>
+                {{ settings.WORDS_ANSWERS_COUNTABLE_FORMS|py_pluralize(answer_count) }}
+                </div>
+            </div>
+            <div class="votes 
+                        {% if question.score == 0 -%}
+                            no-votes
+                        {% else -%}
+                            some-votes
+                        {%- endif -%}">
+                <span class="item-count">{{question.score|humanize_counter}}</span>
+                <div>
+                {% trans cnt=question.score %}vote{% pluralize %}votes{% endtrans %}
+                </div>
             </div>
         </div>
-        <div class="clearfix"></div>
         <div class="userinfo">
             {{ timeago(thread.last_activity_at) }}
             {% set latest_revision = thread.get_latest_revision(user=visitor) %}
@@ -55,6 +79,4 @@
             {% endif %}
         </div>
     </div>
-    <h2><a href="{{ question.get_absolute_url(thread=thread) }}">{{thread.get_title()|escape}}</a></h2>
-    {{ tag_list_widget(thread.get_tag_names(), search_state=search_state) }}
 </div>

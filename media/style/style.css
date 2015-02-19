@@ -536,7 +536,6 @@ h1 {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 80px 0 8px;
   -webkit-box-shadow: 0 0 0 #929292;
   -moz-box-shadow: 0 0 0 #929292;
   box-shadow: 0 0 0 #929292;
@@ -1136,8 +1135,10 @@ body.anon.ask-page .search-drop-menu {
 #listSearchTags {
   float: left;
   margin-top: 3px;
+  marin
   color: #707070;
   font-size: 16px;
+  padding: 10px;
 }
 ul#searchTags {
   margin-left: 10px;
@@ -1157,18 +1158,22 @@ ul#searchTags {
   color: #1b79bd;
 }
 /* ----- Question list , check main_page/content.html and macros/macros.html----- */
-#question-list {
-  float: left;
-  position: relative;
-  width: 100%;
+.mobileAnswers {
+  display: none;
 }
 .short-summary {
   filter: inherit;
-  padding: 35px 10px 10px 35px;
+  padding: 10px 10px;
   margin-bottom: 1px;
   overflow: hidden;
   float: left;
 
+}
+.short-summary .questionTitle,
+.short-summary .questionTags,
+.short-summary .counts {
+  display: inline-block;
+  width: 100%;
 }
 .short-summary h2 {
   font-size: 30px;
@@ -1176,7 +1181,6 @@ ul#searchTags {
   line-height: 26px;
   padding-left: 0;
   margin-bottom: 7px;
-  display: block;
 }
 .short-summary a {
   color: #464646;
@@ -1199,19 +1203,17 @@ ul#searchTags {
   font-size: 11px;
 }
 .short-summary .counts {
-  float: right;
-  margin: 4px 0 0 5px;
+  margin-top: 20px;
 }
 .short-summary .counts .item-count {
-  padding: 0px 5px 0px 5px;
   font-size: 25px;
 }
 .short-summary .counts .votes div,
 .short-summary .counts .views div,
 .short-summary .counts .answers div,
 .short-summary .counts .favorites div {
-  margin-top: 3px;
   font-size: 14px;
+  padding-bottom: 3px;
   line-height: 14px;
   color: #646464;
 }
@@ -1224,11 +1226,10 @@ ul#searchTags {
 .short-summary .views {
   text-align: center;
   margin: 0 3px;
-  padding: 8px 2px 0px 2px;
   width: 51px;
   float: right;
-  height: 44px;
   border: #dbdbd4 1px solid;
+  border-radius: 5px;
 }
 .short-summary .votes {
   background: url(../images/vote-background.png) repeat-x;
@@ -1394,9 +1395,9 @@ ul#related-tags {
 ul.tags li {
   float: left;
   display: block;
-  margin: 0 8px 8px 0;
+  margin: 0 8px 0 0;
   padding: 0;
-  height: 20px;
+  text-align: center;
 }
 .wildcard-tags {
   clear: both;
@@ -1423,6 +1424,10 @@ ul#related-tags li {
   clear: left;
 }
 /* .tag-left and .tag-right are for the sliding doors decoration of tags */
+.tag {
+  border-radius: 5px;
+  cursor: pointer;
+}
 .tag-left {
   cursor: pointer;
   display: block;
@@ -1430,21 +1435,12 @@ ul#related-tags li {
   height: 17px;
   margin: 0 5px 0 0;
   padding: 0;
-  -webkit-box-shadow: 0px 0px 5px #d3d6d7;
-  -moz-box-shadow: 0px 0px 5px #d3d6d7;
-  box-shadow: 0px 0px 5px #d3d6d7;
 }
 .tag-right {
   background: #f3f6f6;
   border: #fff 1px solid ;
-  border-top: #fff 2px solid;
-  outline: #cfdbdb 1px solid;
-  /* .box-shadow(0px,1px,0px,#88a8a8);*/
-
   display: block;
   float: left;
-  height: 17px;
-  line-height: 17px;
   font-weight: normal;
   font-size: 11px;
   padding: 0px 8px 0px 8px;
@@ -1464,13 +1460,25 @@ ul#related-tags li {
   -webkit-border-bottom-right-radius: 4px;
   -webkit-border-top-right-radius: 4px;
 }
+.deletable-tag .delete-icon {
+  margin-top: 0px;
+  line-height: inherit;
+  height: 28px;
+  margin-left: -2px;
+  cursor: pointer;
+}
+.tagsMessage {
+  height: 29px;
+  padding-top: 5px;
+}
 .tags a.tag-right,
 .tags span.tag-right {
   color: #585858;
   text-decoration: none;
 }
 .tags a:hover {
-  color: #1A1A1A;
+  background-color: black;
+  color: white;
 }
 .users-page th,
 .tags-page th,
@@ -4271,6 +4279,55 @@ td.setting-input textarea {
   background-color: Highlight;
   color: HighlightText;
 }
+
+.input-tool-tip {
+  display: none;
+}
+
+.mainHeader .mainTagline {
+  font-size: 90px;
+  display: block;
+  float:  left;
+  clear: none;
+  font-family: 'StationMedium'; 
+  font-weight: normal; 
+  font-style: normal; 
+}
+
+.mainHeader img {
+  width: 90px;
+  margin:  10px;
+  float:  left;
+}
+
+.short-summary {
+  width: 100%;
+}
+
+.mainContent {
+  background: white;
+  box-shadow: 0px 10px 30px #888888;
+  min-height: 100vh;
+  padding-top: 59px;
+  margin-top: -59px;
+}
+
+.mainNav a {
+  color: black;
+}
+
+.mainNav a:hover {
+  color: #303030;
+}
+
+.search-results-box {
+  display: table;
+}
+
+.search-results-box .btn {
+  margin: 5px 0px 10px 0px;
+}
+
 /* modifications for small screens */
 @media screen and (max-width: 960px) {
   /* content margins touch viewport */
@@ -4304,9 +4361,6 @@ td.setting-input textarea {
   .question-page .vote-buttons {
     margin-right: 2px;
   }
-  .tag-right {
-    height: 20px;
-  }
 }
 @media screen and (max-width: 800px) {
   body {
@@ -4337,6 +4391,7 @@ td.setting-input textarea {
   .copyright,
   .counts .views,
   .counts .votes,
+  .counts .answers,
   .help,
   .rss,
   .scope-selector,
@@ -4346,6 +4401,17 @@ td.setting-input textarea {
   .userinfo,
   .widgets {
     display: none;
+  }
+  .mobileAnswers {
+    display: inline;
+    float: right;
+    border: 1px solid #dbdbd4;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 11px;
+  }
+  .questionTags {
+    width: auto !important;
   }
   .ask-page input[type="submit"].searchBtn,
   .edit-question-page input[type="submit"].searchBtn {
@@ -4452,11 +4518,11 @@ td.setting-input textarea {
   }
   #searchBar,
   body.anon #searchBar {
-    margin: -49px 8px 0 52px;
+    margin: -49px 8px 0 0px;
   }
   .search-drop-menu,
   body.anon .search-drop-menu {
-    margin: 0 8px 0 52px;
+    margin: 0 8px 0 0px;
   }
   .short-summary {
     width: 100%;
@@ -4478,6 +4544,31 @@ td.setting-input textarea {
   .users-page input[type="text"],
   .user-profile-edit-page input[type="text"],
   .user-profile-page input[type="text"] {
+    width: 100%;
+  }
+
+  #searchBar input.searchInput {
+    width: 100%;
+  }
+
+  .mainHeader .mainTagline {
+    font-size: 70px;
+    float: left;
+    display: inline;
+  }
+
+  .mainHeader img {
+    display: inline;
+    float: left;
+  }
+
+  .mainNav.nav.nav-pills {
+    float: none !important;
+  }
+
+  .search-drop-menu {
+    margin-left: auto;
+    margin-right: auto;
     width: 100%;
   }
 }
@@ -4778,44 +4869,4 @@ body.lang-nb_NO .box .inputs #subscribedTagInput,
 body.lang-nb_NO .box .inputs #ab-tag-search,
 body.lang-nb_NO .box .inputs #ab-tag-search {
   width: 133px;
-}
-
-.input-tool-tip {
-  display: none;
-}
-
-.mainHeader .mainTagline {
-  font-size: 120px;
-  display: block;
-  float:  left;
-  clear: none;
-  font-family: 'StationMedium'; 
-  font-weight: normal; 
-  font-style: normal; 
-}
-
-.mainHeader img {
-  width: 140px;
-  margin:  10px;
-  float:  left;
-}
-
-.short-summary {
-  width: 100%;
-}
-
-.mainContent {
-  background: white;
-  box-shadow: 0px 10px 30px #888888;
-  min-height: 100vh;
-  padding-top: 59px;
-  margin-top: -59px;
-}
-
-.mainNav a {
-  color: black;
-}
-
-.mainNav a:hover {
-  color: #303030;
-}
+} 
